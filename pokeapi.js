@@ -43,7 +43,7 @@ Promise.all(poke_array)
 */
 
 /*      Task 1.3      */
-
+/*
 Promise.any([
     axios.get(`https://pokeapi.co/api/v2/pokemon/1`),
     axios.get(`https://pokeapi.co/api/v2/pokemon/4`),
@@ -54,4 +54,23 @@ Promise.any([
   })
   .catch((error) => {
       console.log(error);
+});
+*/
+
+/*      Task 1.4      */
+
+Promise.props({
+  "pokemon": axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10`),
+  "item": axios.get(`https://pokeapi.co/api/v2/item?limit=10`),
+  "location": axios.get(`https://pokeapi.co/api/v2/location?limit=10`),
+})
+.then((response) => {
+  Object.keys(response).forEach((key) => {
+    response[key].data.results.forEach((obj, counter) => {
+      console.log(`${key}_${counter + 1}: ${obj.name}`);
+    });
+  });
+})
+.catch((error) => {
+    console.log(error);
 });
