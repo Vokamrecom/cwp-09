@@ -58,7 +58,7 @@ Promise.any([
 */
 
 /*      Task 1.4      */
-
+/*
 Promise.props({
   "pokemon": axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10`),
   "item": axios.get(`https://pokeapi.co/api/v2/item?limit=10`),
@@ -73,4 +73,22 @@ Promise.props({
 })
 .catch((error) => {
     console.log(error);
-});
+});*/
+
+/*      Task 1.5      */
+
+let berries = [];
+for(let i = 0; i < 4; i++){
+    berries.push(axios.get(`https://pokeapi.co/api/v2/berry/${i + 1}`));
+}
+Promise.map(berries, (berry) => {
+    return berry.data;
+})
+    .then((response) => {
+        response.forEach((obj, counter) => {
+            console.log(`Berry_${counter + 1}: ${obj.name}(${obj.size})`);
+        });
+    })
+    .catch((error) => {
+        console.log(error);
+    });
