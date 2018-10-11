@@ -16,7 +16,7 @@ axios.get('http://pokeapi.co/api/v2/pokemon/42')
     */
 
 /*      Task 1.2      */
-
+/*
 let poke_array = []
 for (var i = 0; i < 2; ++i) {
   poke_array.push(
@@ -36,6 +36,21 @@ Promise.all(poke_array)
             console.log(`${counter + 1}.${pok_number + 1}: ${pokemon.name}`);
         });
     });
+  })
+  .catch((error) => {
+      console.log(error);
+});
+*/
+
+/*      Task 1.3      */
+
+Promise.any([
+    axios.get(`https://pokeapi.co/api/v2/pokemon/1`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/4`),
+    axios.get(`https://pokeapi.co/api/v2/pokemon/7`)
+  ])
+  .then((response) => {
+    console.log(`id-${response.data.id}: ${response.data.name}`);
   })
   .catch((error) => {
       console.log(error);
